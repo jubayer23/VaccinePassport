@@ -1,8 +1,12 @@
 package com.sprytech.vaccinepassport.ui.patientRegister
 
+import android.app.Activity
 import android.app.DatePickerDialog
+import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.os.Handler
+import android.provider.MediaStore
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +16,7 @@ import androidx.databinding.DataBindingUtil
 import com.sprytech.vaccinepassport.R
 import com.sprytech.vaccinepassport.databinding.FragmentEnterOtpBinding
 import com.sprytech.vaccinepassport.databinding.FragmentPatientRegisterBinding
+import kotlinx.android.synthetic.main.fragment_enter_document.*
 import kotlinx.android.synthetic.main.fragment_patient_register.*
 import java.util.*
 import javax.xml.datatype.DatatypeConstants.MONTHS
@@ -50,6 +55,11 @@ class PatientRegisterFragment : Fragment() {
         binding.llForm1.visibility = View.VISIBLE
         binding.llForm2.visibility = View.GONE
         binding.llForm3.visibility = View.GONE
+
+        binding.btnNationalId.setOnClickListener {
+            val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            startActivityForResult(cameraIntent, 200)
+        }
 
         binding.edDob.setOnClickListener {
             val c = Calendar.getInstance()
@@ -133,6 +143,14 @@ class PatientRegisterFragment : Fragment() {
 
 
         return binding.root
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK && requestCode == 200 && data != null){
+            binding.llPreview.visibility = View.VISIBLE
+            binding.imgPreview.setImageBitmap(data.extras?.get("data") as Bitmap)
+        }
     }
 
     fun loadData(){

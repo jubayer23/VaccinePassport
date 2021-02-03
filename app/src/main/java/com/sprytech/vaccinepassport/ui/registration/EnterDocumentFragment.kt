@@ -1,7 +1,10 @@
 package com.sprytech.vaccinepassport.ui.registration
 
+import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Bundle
+import android.provider.MediaStore
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import com.sprytech.vaccinepassport.R
 import com.sprytech.vaccinepassport.databinding.FragmentEnterDocumentBinding
 import com.sprytech.vaccinepassport.ui.registration.howItWorks.HowItWorksActivity2
+import kotlinx.android.synthetic.main.fragment_enter_document.*
 
 
 /**
@@ -35,6 +39,12 @@ class EnterDocumentFragment : Fragment() {
             inflater,
             R.layout.fragment_enter_document, container, false)
 
+
+        binding.btnPassport.setOnClickListener {
+            val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            startActivityForResult(cameraIntent, 200)
+        }
+
         binding.btnUpload.setOnClickListener {
 
             //startActivity(Intent(activity, HowItWorksActivity2::class.java))
@@ -44,6 +54,13 @@ class EnterDocumentFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK && requestCode == 200 && data != null){
+            img_preview.setImageBitmap(data.extras?.get("data") as Bitmap)
+        }
     }
 
     companion object {
