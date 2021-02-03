@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/auth_navigation_2"
+    app:startDestination="@id/welcomeFragment">
+
+    <fragment
+        android:id="@+id/welcomeFragment"
+        android:name="com.sprytech.vaccinepassport.ui.welcome.WelcomeFragment"
+        android:label="WelcomeFragment" >
+        <action
+            android:id="@+id/action_welcomeFragment_to_registrationFragment2"
+            app:destination="@id/registrationFragment2" />
+        <action
+            android:id="@+id/action_welcomeFragment_to_loginFragment2"
+            app:destination="@id/loginFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/registrationFragment2"
+        android:name="com.sprytech.vaccinepassport.ui.registration.RegistrationFragment"
+        android:label="RegistrationFragment" >
+        <action
+            android:id="@+id/action_registrationFragment2_to_enterPhoneNumberFragment"
+            app:destination="@id/enterPhoneNumberFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment2"
+        android:name="com.sprytech.vaccinepassport.ui.login.LoginFragment"
+        android:label="LoginFragment" />
+    <fragment
+        android:id="@+id/enterPhoneNumberFragment"
+        android:name="com.sprytech.vaccinepassport.ui.registration.EnterPhoneNumberFragment"
+        android:label="EnterPhoneNumberFragment" >
+        <action
+            android:id="@+id/action_enterPhoneNumberFragment_to_enterOtpFragment"
+            app:destination="@id/enterOtpFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/enterOtpFragment"
+        android:name="com.sprytech.vaccinepassport.ui.registration.EnterOtpFragment"
+        android:label="EnterOtpFragment" >
+        <action
+            android:id="@+id/action_enterOtpFragment_to_enterDocumentFragment"
+            app:destination="@id/enterDocumentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/enterDocumentFragment"
+        android:name="com.sprytech.vaccinepassport.ui.registration.EnterDocumentFragment"
+        android:label="EnterDocumentFragment" >
+        <action
+            android:id="@+id/action_enterDocumentFragment_to_howItWorksFragment"
+            app:destination="@id/howItWorksFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/howItWorksFragment"
+        android:name="com.sprytech.vaccinepassport.ui.registration.HowItWorksFragment"
+        android:label="HowItWorksFragment" />
+</navigation>
